@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -22,17 +23,29 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
+/**
+ * RxJava1
+ */
+
 public class FirstActivity extends AppCompatActivity {
     private ImageView imageview;
     List<File> folders = new ArrayList<>();
-    private int drawable=R.mipmap.ic_launcher_round;
+    private int drawable = R.mipmap.ic_launcher_round;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         imageview = (ImageView) findViewById(R.id.imageview);
         imageview.setOnClickListener(v -> {
-            Toast.makeText(this, "我被点击了", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FirstActivity.this, "我被点击了", Toast.LENGTH_SHORT).show();
+        });
+
+        imageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FirstActivity.this, "我被点击了", Toast.LENGTH_SHORT).show();
+            }
         });
 
 //        printNames();
@@ -148,48 +161,48 @@ public class FirstActivity extends AppCompatActivity {
             }
         });
 
-        Action1<String> onNextAction=new Action1<String>() {
+        Action1<String> onNextAction = new Action1<String>() {
             @Override
             public void call(String s) {
 
             }
         };
 
-        Action1<Throwable> onErrorAction=new Action1<Throwable>() {
+        Action1<Throwable> onErrorAction = new Action1<Throwable>() {
             @Override
             public void call(Throwable throwable) {
 
             }
         };
 
-        Action0 onCompletedAction=new Action0() {
+        Action0 onCompletedAction = new Action0() {
             @Override
             public void call() {
 
             }
         };
-
         observable.subscribe(onNextAction);
-        observable.subscribe(onNextAction,onErrorAction);
+        observable.subscribe(onNextAction, onErrorAction);
         observable.subscribe(onNextAction, onErrorAction, onCompletedAction);
     }
 
 
     public void printNames() {
-        String[] names = {"南京","北京","天津","河北","河南","黑龙江"};
+        String[] names = {"南京", "北京", "天津", "河北", "河南", "黑龙江"};
         Observable.from(names).subscribe(new Action1<String>() {
             @Override
             public void call(String s) {
                 Log.e("FirstActivity", s);
             }
         });
+
     }
 
     public void getDrawable() {
         Observable.create(new Observable.OnSubscribe<Drawable>() {
             @Override
             public void call(Subscriber<? super Drawable> subscriber) {
-                Drawable drawable=getTheme().getDrawable(R.mipmap.ic_launcher_round);
+                Drawable drawable = getTheme().getDrawable(R.mipmap.ic_launcher_round);
                 subscriber.onNext(drawable);
                 subscriber.onCompleted();
             }
@@ -218,39 +231,23 @@ public class FirstActivity extends AppCompatActivity {
 //                imageview.setImageDrawable(drawable);
 //            }
 //        });
-        .subscribe(new Subscriber<Drawable>() {
-            @Override
-            public void onCompleted() {
-                Log.e("FirstActivity", "完成");
-            }
+                .subscribe(new Subscriber<Drawable>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.e("FirstActivity", "完成");
+                    }
 
-            @Override
-            public void onError(Throwable e) {
+                    @Override
+                    public void onError(Throwable e) {
 
-            }
+                    }
 
-            @Override
-            public void onNext(Drawable drawable) {
-                imageview.setImageDrawable(drawable);
-            }
-        });
+                    @Override
+                    public void onNext(Drawable drawable) {
+                        imageview.setImageDrawable(drawable);
+                    }
+                });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
