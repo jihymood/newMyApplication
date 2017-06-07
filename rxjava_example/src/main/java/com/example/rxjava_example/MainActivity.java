@@ -1,22 +1,22 @@
 package com.example.rxjava_example;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TableLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+/**
+ * 滑动页
+ */
 public class MainActivity extends AppCompatActivity {
 
-    @Bind(R.id.tableLayout)
-    TableLayout tableLayout;
     @Bind(R.id.viewpager)
     ViewPager viewpager;
+    @Bind(R.id.tableLayout)
+    TabLayout tableLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +24,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        viewpager.setAdapter();
-
-
+        viewpager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager()));
+        tableLayout.setupWithViewPager(viewpager);
 
     }
 }
