@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import com.example.rxjava20.Api.BaiDuService;
 import com.example.rxjava20.bean.Book;
+import com.example.rxjava20.bean.DoubanBook;
+import com.example.rxjava20.bean.Weather;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import org.reactivestreams.Subscriber;
@@ -38,9 +40,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         text = (TextView) findViewById(R.id.text);
 //        getDouban();
-        getBaidu();
+//        getBaidu();
 //        getBook();
+//        getDoubanBook();
+//        getDoubanBook1();
+//        getWeather();
+//        getWeather1();
+
+
+
+
     }
+
 
     public void rxjava() {
 //        Observable.create(new ObservableOnSubscribe<String>() {
@@ -86,11 +97,11 @@ public class MainActivity extends AppCompatActivity {
         flowable.subscribe(subscriber);
     }
 
-    public void getDouban() {
+    public void getDouban() { //返回Call成功
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.douban.com/")
 //                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 添加RxJava2的适配器支持
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create()) //必须要有这句
                 .build();
         BaiDuService service = retrofit.create(BaiDuService.class);
         Call<Book> call = service.getText("1220562");
@@ -148,13 +159,13 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void getBook() {
-        Retrofit retrofit=new Retrofit.Builder()
+    public void getBook() { //成功
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.douban.com/v2/")//https://api.douban.com/v2/book/1220562
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 添加RxJava2的适配器支持
                 .addConverterFactory(GsonConverterFactory.create()) //也必不可少
                 .build();
-        BaiDuService service=retrofit.create(BaiDuService.class);
+        BaiDuService service = retrofit.create(BaiDuService.class);
 //        service.getBook("1220562")
 //                .subscribeOn(Schedulers.newThread())
 //                .observeOn(AndroidSchedulers.mainThread())
@@ -166,8 +177,8 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //                });
         service.getText1("1220562")
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread()) //也必不可少
+                .observeOn(AndroidSchedulers.mainThread()) //也必不可少
                 .subscribe(new Subscriber<Book>() {
                     @Override
                     public void onSubscribe(Subscription s) {
@@ -182,7 +193,73 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable t) {
+                        t.printStackTrace();
+                        Toast.makeText(MainActivity.this, "获取失败，请检查网络是否畅通", Toast.LENGTH_SHORT).show();
+                    }
 
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void getDoubanBook() { //失败，可能是解析json出问题了?? response为空
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl("http://api.m.mtime.cn/PageSubArea/TrailerList.api/")
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        BaiDuService service=retrofit.create(BaiDuService.class);
+        Call<DoubanBook> call=service.getDouban();
+        call.enqueue(new Callback<DoubanBook>() {
+            @Override
+            public void onResponse(Call<DoubanBook> call, Response<DoubanBook> response) {
+                Toast.makeText(MainActivity.this, "获取成功"+response.body(), Toast.LENGTH_SHORT).show();
+//                text.setText(response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<DoubanBook> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getDoubanBook1() { //失败
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://api.m.mtime.cn/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        BaiDuService service = retrofit.create(BaiDuService.class);
+        service.getDouban1("TrailerList.api")
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<DoubanBook>() {
+//                    @Override
+//                    public void accept(@NonNull DoubanBook doubanBook) throws Exception {
+//                        Toast.makeText(MainActivity.this, "获取成功", Toast.LENGTH_SHORT).show();
+//                        Log.e("MainActivity", doubanBook.toString());
+//                    }
+//                });
+                .subscribe(new Subscriber<DoubanBook>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(Long.MAX_VALUE);
+                    }
+
+                    @Override
+                    public void onNext(DoubanBook doubanBook) {
+                        Toast.makeText(MainActivity.this, "获取成功"+doubanBook.getTrailers(), Toast.LENGTH_SHORT).show();
+//                        text.setText(doubanBook.toString());
+//                        text.setText(doubanBook.getTrailers().get(0).getSummary());
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                        Toast.makeText(MainActivity.this, "获取失败，请检查网络是否畅通", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -193,4 +270,65 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void getWeather() { //Call返回成功
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://api.k780.com:88/")
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create()) //必须要加
+                .build();
+        BaiDuService service = retrofit.create(BaiDuService.class);
+        service.getWeather("weather.future", "1", "10003", "b59bc3ef6191eb9f747dd4e83c99f2a4", "json")
+                .enqueue(new Callback<Weather>() { //enqueue已经是异步操作了
+                    @Override
+                    public void onResponse(Call<Weather> call, Response<Weather> response) {
+                        Toast.makeText(MainActivity.this, "获取成功", Toast.LENGTH_SHORT).show();
+                        text.setText(response.body().getResult().get(0).getWeather());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Weather> call, Throwable t) {
+
+                    }
+                });
+    }
+
+    /**
+     * 如果没有
+     *   .subscribeOn(Schedulers.newThread()) //必须要有
+     *   .observeOn(AndroidSchedulers.mainThread())//必须要有
+     */
+    public void getWeather1() { //  加Flowable+subscribeOn+observeOn返回成功，不加则返回失败
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://api.k780.com:88/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//必须要有
+                .addConverterFactory(GsonConverterFactory.create())//必须要有
+                .build();
+        BaiDuService service = retrofit.create(BaiDuService.class);
+        service.getWeather1("weather.future", "1", "10003", "b59bc3ef6191eb9f747dd4e83c99f2a4", "json")
+                .subscribeOn(Schedulers.io()) //必须要有
+                .observeOn(AndroidSchedulers.mainThread())//必须要有
+                .subscribe(new Subscriber<Weather>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(Long.MAX_VALUE);
+                    }
+
+                    @Override
+                    public void onNext(Weather weather) {
+                        Toast.makeText(MainActivity.this, "获取成功", Toast.LENGTH_SHORT).show();
+                        text.setText(weather.getResult().get(0).getWeather());
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                        Toast.makeText(MainActivity.this, "获取失败，请检查网络是否畅通", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e("MainActivity", "失败");
+                    }
+                });
+    }
 }

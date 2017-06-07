@@ -2,17 +2,22 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.stepview.MainActivity">
 
-    <com.example.stepview.HorizontalStepView
-        android:id="@+id/hsv_step_view"
+    <com.example.horizontalselectedviewlibrary.HorizontalselectedView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/hd_main"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginBottom="40dp"
-        />
-
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        app:HorizontalselectedViewSeesize="5"
+        app:HorizontalselectedViewSelectedTextColor="@color/colorAccent"
+        app:HorizontalselectedViewSelectedTextSize="60"
+        app:HorizontalselectedViewTextColor="@color/colorPrimaryDark"
+        app:HorizontalselectedViewTextSize="40"/>
 
 </LinearLayout>

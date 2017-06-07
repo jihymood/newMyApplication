@@ -17,6 +17,9 @@ import com.example.myapp.fragment.SecondFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * app中的四个任务模块
+ */
 public class MainActivity extends AppCompatActivity {
 
     private Class<?> fragmentArray[] = {FirstFragment.class, SecondFragment.class};
@@ -40,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
          */
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager.getFragments() == null || fragmentManager.getFragments().size() <= 0) {
-
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.add(R.id.realcontent, Fragment.instantiate(this, fragmentArray[openIndex].getName())
             );

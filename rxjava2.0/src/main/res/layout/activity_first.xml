@@ -7,4 +7,11 @@
     android:layout_height="match_parent"
     tools:context="com.example.rxjava20.FirstActivity">
 
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="368dp"
+        android:layout_height="100dp"
+        android:text="@string/app_name"
+        android:gravity="center"/>
+
 </android.support.constraint.ConstraintLayout>
