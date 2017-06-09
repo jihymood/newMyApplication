@@ -2,23 +2,19 @@ package com.example.rxjava20;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rxjava20.Api.DituService;
-import com.example.rxjava20.Api.TestService;
-import com.example.rxjava20.bean.BasePointModel;
 import com.example.rxjava20.bean.Map;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-import java.util.List;
-import java.util.Observer;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,12 +35,12 @@ public class ThreeActivity extends AppCompatActivity {
 
 //        getDitu();
 //        getDitu1();
+//        getDitu2();
 //        getDitu3();
-//        getaaa();
-        getPoint();
+
     }
 
-    public void getDitu() {
+    public void getDitu() { //成功
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://gc.ditu.aliyun.com/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -67,7 +63,7 @@ public class ThreeActivity extends AppCompatActivity {
         });
     }
 
-    public void getDitu1() {
+    public void getDitu1() { //失败
         /*http://gc.ditu.aliyun.com/regeocoding?l=39.938133,116.395739&type=001*/
         Retrofit retrofit = new Retrofit.Builder()
 //                .baseUrl("http://gc.ditu.aliyun.com/regeocoding?l=39.938133,116.395739&type=001"+"/")
@@ -94,19 +90,27 @@ public class ThreeActivity extends AppCompatActivity {
 
     }
 
-    public void getDitu2() {
+    public void getDitu2() { //成功
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://gc.ditu.aliyun.com/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         DituService dituService = retrofit.create(DituService.class);
-        Observer observer = dituService.getDitu2("regeocoding", "39.938133,116.395739", "001");
-
+        dituService.getDitu2("regeocoding", "39.938133,116.395739", "001")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Map>() {
+                    @Override
+                    public void accept(@NonNull Map map) throws Exception {
+                        Toast.makeText(ThreeActivity.this, "获取成功", Toast.LENGTH_SHORT).show();
+                        text.setText(map.getQueryLocation() + "");
+                    }
+                });
 
     }
 
-    public void getDitu3() {
+    public void getDitu3() { //成功
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://gc.ditu.aliyun.com/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -140,54 +144,4 @@ public class ThreeActivity extends AppCompatActivity {
                 });
     }
 
-    public void getaaa() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://172.16.214.24:10002/")
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        TestService testService = retrofit.create(TestService.class);
-        testService.getCom()
-                .enqueue(new Callback<ResponseObj<String>>() {
-                    @Override
-                    public void onResponse(Call<ResponseObj<String>> call, Response<ResponseObj<String>> response) {
-                        Toast.makeText(ThreeActivity.this, "获取成功", Toast.LENGTH_SHORT).show();
-                        text.setText(response.body().data);
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseObj<String>> call, Throwable t) {
-                        Toast.makeText(ThreeActivity.this, "获取失败", Toast.LENGTH_SHORT).show();
-                        text.setText(t.toString());
-                    }
-                });
-    }
-
-    public void getPoint() {
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl("http://172.16.108.137:10002/")
-//                .baseUrl("http://172.16.214.24:10002/")
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        TestService testService = retrofit.create(TestService.class);
-        testService.getBase()
-                .enqueue(new Callback<ResponseObj<List<BasePointModel>>>() {
-                    @Override
-                    public void onResponse(Call<ResponseObj<List<BasePointModel>>> call,
-                                           Response<ResponseObj<List<BasePointModel>>> response) {
-                        Toast.makeText(ThreeActivity.this, "获取成功", Toast.LENGTH_SHORT).show();
-                        text.setText(response.body().data.get(0).getAz());
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseObj<List<BasePointModel>>> call, Throwable t) {
-//                        Toast.makeText(ThreeActivity.this, "获取失败:"+t.toString(), Toast.LENGTH_SHORT).show();
-                        Log.d("ThreeActivity", "获取失败:" + t.toString());
-                        text.setText(t.toString());
-                    }
-
-                });
-
-    }
 }

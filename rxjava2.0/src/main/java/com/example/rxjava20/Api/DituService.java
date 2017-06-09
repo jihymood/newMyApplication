@@ -2,9 +2,8 @@ package com.example.rxjava20.Api;
 
 import com.example.rxjava20.bean.Map;
 
-import java.util.Observer;
-
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -24,8 +23,16 @@ public interface DituService {
 //    Call<Map> getDitu1();
     Call<Map> getDitu1(@Query("l")String lat,@Query("type")String type);
 
+    /**
+     * 注意：这里是Observable,不是Observer
+     * @param ding
+     * @param lat
+     * @param type
+     * @return
+     */
     @GET("/{ding}")
-    Observer getDitu2(@Path("ding") String ding, @Query("l") String lat, @Query("type") String type);
+//    Observer getDitu2(@Path("ding") String ding, @Query("l") String lat, @Query("type") String type); //错误的
+    Observable<Map> getDitu2(@Path("ding") String ding, @Query("l") String lat, @Query("type") String type);
 
     @GET("/{ding}")
     Flowable<Map> getDitu3(@Path("ding") String ding, @Query("l") String lat, @Query("type") String type);

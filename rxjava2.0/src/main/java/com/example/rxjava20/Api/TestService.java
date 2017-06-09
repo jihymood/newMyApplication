@@ -3,6 +3,7 @@ package com.example.rxjava20.Api;
 import com.example.rxjava20.ResponseObj;
 import com.example.rxjava20.bean.BasePointModel;
 import com.example.rxjava20.bean.News;
+import com.example.rxjava20.bean.TestStr;
 
 import java.util.List;
 
@@ -25,8 +26,16 @@ public interface TestService {
     @GET("user1/getCom")
     Call<ResponseObj<String>> getCom();
 
-    @GET("user1/getBase")
-    Call<ResponseObj<List<BasePointModel>>> getBase();
+    @GET("user1/getPointList")
+    Call<ResponseObj<List<BasePointModel>>> getPointList();
+
+    @GET("user1/getStringList")
+    Call<ResponseObj<List<TestStr>>> getStringList();
+
+    @GET("user1/getStrs")
+    Call<ResponseObj<String>> getStrs();
+
+
 
 
 }

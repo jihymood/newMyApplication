@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 //        getDouban();
 //        getBaidu();
 //        getBook();
-//        getDoubanBook();
+        getDoubanBook();
 //        getDoubanBook1();
 //        getWeather();
 //        getWeather1();
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void getBaidu() {
+    public void getBaidu() { //成功
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://www.baidu.com/") //url最后面必须要有斜杠"/"
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 添加RxJava2的适配器支持
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
     public void getDoubanBook() { //失败，可能是解析json出问题了?? response为空
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl("http://api.m.mtime.cn/PageSubArea/TrailerList.api/")
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         BaiDuService service=retrofit.create(BaiDuService.class);

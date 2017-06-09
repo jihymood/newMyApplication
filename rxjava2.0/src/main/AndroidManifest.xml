@@ -13,24 +13,32 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
 
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-            -->
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".FirstActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name=".SecondActivity">
+        </activity>
+        <activity android:name=".ThreeActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN"/>-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER"/>-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".SecondActivity">
-        </activity>
-        <activity android:name=".ThreeActivity">
+        <activity android:name=".ZhabServerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
