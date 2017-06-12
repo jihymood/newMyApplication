@@ -7,11 +7,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rxjava20.Api.TestService;
-import com.example.rxjava20.bean.BasePointModel;
 import com.example.rxjava20.bean.TestStr;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,7 +33,8 @@ public class ZhabServerActivity extends AppCompatActivity {
 
         text = (TextView) findViewById(R.id.textView);
 
-        getPointList();
+//        getPointList();
+        getOldPoint();
 //        getStringList();
 //        getStrs(); //成功
 
@@ -67,27 +68,49 @@ public class ZhabServerActivity extends AppCompatActivity {
     public void getPointList() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://172.16.108.137:10002/")
-//                .baseUrl("http://172.16.214.24:10002/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         TestService testService = retrofit.create(TestService.class);
         testService.getPointList()
-                .enqueue(new Callback<ResponseObj<List<BasePointModel>>>() {
+                .enqueue(new Callback<ResponseObj<Map<String, List<Map<String, Object>>>>>() {
                     @Override
-                    public void onResponse(Call<ResponseObj<List<BasePointModel>>> call,
-                                           Response<ResponseObj<List<BasePointModel>>> response) {
+                    public void onResponse(Call<ResponseObj<Map<String, List<Map<String, Object>>>>> call,
+                                           Response<ResponseObj<Map<String, List<Map<String, Object>>>>> response) {
                         Toast.makeText(ZhabServerActivity.this, "获取成功", Toast.LENGTH_SHORT).show();
-                        text.setText(response.body().data.get(0).getAz());
+                        text.setText(response.body().data.get("layerId").get(0).get("selfWeak").toString());
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseObj<List<BasePointModel>>> call, Throwable t) {
+                    public void onFailure(Call<ResponseObj<Map<String, List<Map<String, Object>>>>> call, Throwable t) {
                         Log.d("ZhabServerActivity", "获取失败:" + t.toString());
                         text.setText(t.toString());
                     }
                 });
+    }
 
+    public void getOldPoint() {
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl("http://172.16.108.137:10002/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        TestService testService = retrofit.create(TestService.class);
+        testService.getOldPoint()
+                .enqueue(new Callback<ResponseObj<Map<String, List<Map<String, Object>>>>>() {
+                    @Override
+                    public void onResponse(Call<ResponseObj<Map<String, List<Map<String, Object>>>>> call,
+                                           Response<ResponseObj<Map<String, List<Map<String, Object>>>>> response) {
+                        Toast.makeText(ZhabServerActivity.this, "获取成功", Toast.LENGTH_SHORT).show();
+                        text.setText(response.body().data.get("layerId").get(0).get("selfWeak").toString());
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseObj<Map<String, List<Map<String, Object>>>>> call, Throwable t) {
+                        Log.d("ZhabServerActivity", "获取失败:" + t.toString());
+                        text.setText(t.toString());
+                    }
+                });
     }
 
     public void getStringList() {

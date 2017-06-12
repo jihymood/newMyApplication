@@ -1,11 +1,11 @@
 package com.example.rxjava20.Api;
 
 import com.example.rxjava20.ResponseObj;
-import com.example.rxjava20.bean.BasePointModel;
 import com.example.rxjava20.bean.News;
 import com.example.rxjava20.bean.TestStr;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -26,16 +26,18 @@ public interface TestService {
     @GET("user1/getCom")
     Call<ResponseObj<String>> getCom();
 
+
+    @GET("user1/getOldPoint")
+    Call<ResponseObj<Map<String, List<Map<String, Object>>>>> getOldPoint();
+
     @GET("user1/getPointList")
-    Call<ResponseObj<List<BasePointModel>>> getPointList();
+    Call<ResponseObj<Map<String, List<Map<String, Object>>>>> getPointList();
 
     @GET("user1/getStringList")
     Call<ResponseObj<List<TestStr>>> getStringList();
 
     @GET("user1/getStrs")
     Call<ResponseObj<String>> getStrs();
-
-
 
 
 }
