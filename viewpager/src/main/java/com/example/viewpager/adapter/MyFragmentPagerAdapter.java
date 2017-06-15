@@ -1,12 +1,13 @@
-package com.example.rxjava_example;
+package com.example.viewpager.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.rxjava_example.Fragment.ElementaryFragment;
-import com.example.rxjava_example.Fragment.MapFragment;
-import com.example.rxjava_example.Fragment.ZipFragment;
+import com.example.viewpager.Fragment.ElementaryFragment;
+import com.example.viewpager.Fragment.MapFragment;
+import com.example.viewpager.Fragment.ZipFragment;
+
 
 /**
  * Created by HASEE on 2017/6/7 14:13

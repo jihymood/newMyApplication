@@ -1,4 +1,4 @@
-package com.example.rxjava_example.bean;
+package com.example.viewpager.bean;
 
 /**
  * Created by HASEE on 2017/6/7 15:34

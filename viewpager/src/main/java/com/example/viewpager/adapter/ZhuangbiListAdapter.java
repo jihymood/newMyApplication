@@ -1,4 +1,4 @@
-package com.example.rxjava_example.adapter;
+package com.example.viewpager.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.rxjava_example.R;
-import com.example.rxjava_example.bean.ZhuangBi;
+import com.example.viewpager.R;
+import com.example.viewpager.bean.ZhuangBi;
 
 import java.util.List;
 
@@ -50,16 +50,19 @@ public class ZhuangbiListAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return list.size();
     }
-}
 
-class MyViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.imageIv)
-    ImageView imageIv;
-    @Bind(R.id.descriptionTv)
-    TextView descriptionTv;
 
-    public MyViewHolder(View itemView) {
-        super(itemView);
-        ButterKnife.bind(this, itemView);
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.imageIv)
+        ImageView imageIv;
+        @Bind(R.id.descriptionTv)
+        TextView descriptionTv;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
     }
+
+
 }

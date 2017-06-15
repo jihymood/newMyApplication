@@ -1,6 +1,7 @@
-package com.example.rxjava_example.api;
+package com.example.viewpager.api;
 
-import com.example.rxjava_example.bean.ZhuangBi;
+
+import com.example.viewpager.bean.ZhuangBi;
 
 import java.util.List;
 
@@ -16,5 +17,6 @@ public interface ZhuangBiApi {
 
     @GET("search")
     Observable<List<ZhuangBi>> search(@Query("q") String query);
+
 
 }

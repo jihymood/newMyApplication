@@ -1,4 +1,4 @@
-package com.example.rxjava_example.Fragment;
+package com.example.viewpager.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,10 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.rxjava_example.R;
-import com.example.rxjava_example.adapter.ZhuangbiListAdapter;
-import com.example.rxjava_example.api.NetWork;
-import com.example.rxjava_example.bean.ZhuangBi;
+import com.example.viewpager.R;
+import com.example.viewpager.adapter.ZhuangbiListAdapter;
+import com.example.viewpager.api.NetWorkManager;
+import com.example.viewpager.bean.ZhuangBi;
 
 import java.util.List;
 
@@ -44,6 +44,8 @@ public class ElementaryFragment extends BaseFragment {
     @Bind(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    private ZhuangbiListAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -64,32 +66,43 @@ public class ElementaryFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.searchRb1:
+                swipeRefreshLayout.setRefreshing(true);
                 search(searchRb1.getText().toString());
                 break;
             case R.id.searchRb2:
+                swipeRefreshLayout.setRefreshing(true);
+                search(searchRb2.getText().toString());
                 break;
             case R.id.searchRb3:
+                swipeRefreshLayout.setRefreshing(true);
+                search(searchRb3.getText().toString());
                 break;
             case R.id.searchRb4:
+                swipeRefreshLayout.setRefreshing(true);
+                search(searchRb4.getText().toString());
                 break;
         }
     }
 
     private void search(String key) {
-        NetWork.zhuangBiApi()
+        NetWorkManager.zhuangBiApi()
                 .search(key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<List<ZhuangBi>>() {
                     @Override
                     public void call(List<ZhuangBi> zhuangBis) {
+                        swipeRefreshLayout.setRefreshing(false);
                         Log.e("ElementaryFragment", "zhuangBis:" + zhuangBis.size());
+                        // 表格布局，第一个参数表示上下文，第二个参数表示表格有多少列
                         gridRv.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                        gridRv.setAdapter(new ZhuangbiListAdapter(getActivity(),zhuangBis));
+                        adapter = new ZhuangbiListAdapter(getActivity(), zhuangBis);
+                        gridRv.setAdapter(adapter);
 
 //                        swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);
 //                        swipeRefreshLayout.setEnabled(false);
                     }
                 });
     }
+
 }

@@ -1,4 +1,4 @@
-package com.example.rxjava_example.Fragment;
+package com.example.viewpager.Fragment;
 
 
 import android.support.v4.app.Fragment;

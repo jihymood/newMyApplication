@@ -1,4 +1,4 @@
-package com.example.rxjava_example.api;
+package com.example.viewpager.api;
 
 import android.content.Context;
 
@@ -10,14 +10,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by HASEE on 2017/6/7 16:14
  */
 
-public class NetWork {
+public class NetWorkManager {
 
-    private static NetWork instance;
+    private static NetWorkManager instance;
     private static ZhuangBiApi zhuangbiApi;
+    private static GankApi gankApi;
 
-    public NetWork getInstance(Context context) {
+    public NetWorkManager getInstance(Context context) {
         if (instance == null) {
-            instance = new NetWork();
+            instance = new NetWorkManager();
         }
         return instance;
     }
@@ -32,5 +33,17 @@ public class NetWork {
             zhuangbiApi = retrofit.create(ZhuangBiApi.class);
         }
         return zhuangbiApi;
+    }
+
+    public static GankApi gankApi() {
+        if (gankApi == null) {
+            gankApi = new Retrofit.Builder()
+                    .baseUrl("http://gank.io/api/")
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                    .create(GankApi.class);
+        }
+        return gankApi;
     }
 }
