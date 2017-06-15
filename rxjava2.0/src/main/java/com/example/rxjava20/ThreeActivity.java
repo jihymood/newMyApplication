@@ -2,9 +2,11 @@ package com.example.rxjava20;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.rxjava20.Api.DituService;
 import com.example.rxjava20.bean.Map;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -25,6 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ThreeActivity extends AppCompatActivity {
 
     private TextView text;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,9 @@ public class ThreeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_three);
 
         text = (TextView) findViewById(R.id.textView);
-
+        imageView = (ImageView) findViewById(R.id.image);
+        Glide.with(this).load("http://192.168.155.1:8080/SZWGServices/attachment/queryById.ws")
+                .into(imageView);
 //        getDitu();
 //        getDitu1();
 //        getDitu2();

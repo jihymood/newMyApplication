@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rxjava20.Api.TestService;
+import com.example.rxjava20.bean.TestOther;
 import com.example.rxjava20.bean.TestStr;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -34,12 +35,36 @@ public class ZhabServerActivity extends AppCompatActivity {
         text = (TextView) findViewById(R.id.textView);
 
 //        getPointList();
-        getOldPoint();
+//        getOldPoint();
 //        getStringList();
 //        getStrs(); //成功
 
+        test();
     }
 
+
+    public void test() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.155.1:8080/SZWGServices/attachment/query.ws/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        TestService testService = retrofit.create(TestService.class);
+        testService.test("21eaaa33-9565-4441-9212-96338bfc8cff", "admin")
+                .enqueue(new Callback<TestOther>() {
+                    @Override
+                    public void onResponse(Call<TestOther> call, Response<TestOther> response) {
+                        Toast.makeText(ZhabServerActivity.this, "获取成功", Toast.LENGTH_SHORT).show();
+                        text.setText(response.body().getResultCode());
+                    }
+
+                    @Override
+                    public void onFailure(Call<TestOther> call, Throwable t) {
+                        Toast.makeText(ZhabServerActivity.this, "获取失败", Toast.LENGTH_SHORT).show();
+                        text.setText(t.toString());
+                    }
+                });
+    }
 
     public void getaaa() {
         Retrofit retrofit = new Retrofit.Builder()

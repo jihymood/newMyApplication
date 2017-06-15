@@ -1,1 +1,1 @@
-include ':app', ':myapp', ':retrolambda', ':rxjava2.0', 'newapp'
+include ':app', ':fragment', ':retrolambda', ':rxjava2.0', ':stepview', ':bezier', ':viewpager', ':recyclerview', ':supertextview', 'newapp'

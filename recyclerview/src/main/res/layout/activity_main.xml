@@ -7,10 +7,24 @@
     android:orientation="vertical"
     tools:context="com.example.recyclerview.MainActivity">
 
+
+    <com.jcodecraeer.xrecyclerview.LoadingMoreFooter
+        android:id="@+id/load"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/xRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.jcodecraeer.xrecyclerview.XRecyclerView>
+    </com.jcodecraeer.xrecyclerview.LoadingMoreFooter>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:scrollbars="none"/>
+        android:scrollbars="none"
+        android:visibility="invisible"/>
 </LinearLayout>

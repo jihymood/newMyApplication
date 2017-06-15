@@ -19,6 +19,7 @@ public interface DituService {
     @GET("/{ding}")
     Call<Map> getDitu(@Path("ding")String ding,@Query("l")String lat,@Query("type")String type);
 
+
     @GET("/")
 //    Call<Map> getDitu1();
     Call<Map> getDitu1(@Query("l")String lat,@Query("type")String type);

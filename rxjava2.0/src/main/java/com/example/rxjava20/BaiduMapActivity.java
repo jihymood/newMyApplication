@@ -7,11 +7,17 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.example.rxjava20.map.MapUtils;
 import com.example.rxjava20.map.MyLocation;
+
 
 
 public class BaiduMapActivity extends AppCompatActivity {
@@ -51,6 +57,15 @@ public class BaiduMapActivity extends AppCompatActivity {
          *需要加上手势操作的监听，然后在listener中进行操作，正确的
          */
         mBaiduMap.setOnMapStatusChangeListener(listener);
+
+        double latitude = 31.99601;
+        double longitude = 118.738368;
+        LatLng latLng = new LatLng(latitude, longitude);
+        BitmapDescriptor descriptor = BitmapDescriptorFactory.fromResource(R.mipmap.icon_markh);
+
+        OverlayOptions options = new MarkerOptions().position(latLng).icon(descriptor);
+        Marker marker = (Marker) mBaiduMap.addOverlay(options);
+
 
     }
 

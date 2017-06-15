@@ -2,6 +2,7 @@ package com.example.rxjava20.Api;
 
 import com.example.rxjava20.ResponseObj;
 import com.example.rxjava20.bean.News;
+import com.example.rxjava20.bean.TestOther;
 import com.example.rxjava20.bean.TestStr;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Created by HASEE on 2017/5/2 14:39
@@ -25,6 +27,9 @@ public interface TestService {
 
     @GET("user1/getCom")
     Call<ResponseObj<String>> getCom();
+
+    @POST("/")
+    Call<TestOther> test(@Query("projectId")String projectId, @Query("userNo")String userNo);
 
 
     @GET("user1/getOldPoint")
