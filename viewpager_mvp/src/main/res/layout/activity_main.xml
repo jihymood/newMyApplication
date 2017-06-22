@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.stepview.MainActivity">
+    tools:context="com.example.viewpager_mvp.MainActivity">
 
     <com.example.horizontalselectedviewlibrary.HorizontalselectedView
         xmlns:app="http://schemas.android.com/apk/res-auto"
