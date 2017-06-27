@@ -1,9 +1,9 @@
-package com.example.stepview.banner;
+package com.example.viewpager_mvp.otherTest.banner;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.stepview.R;
+import com.example.viewpager_mvp.R;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;

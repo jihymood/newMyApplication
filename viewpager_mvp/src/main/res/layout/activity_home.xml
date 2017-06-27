@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.viewpager_mvp.home.HomeActivity">
 
+    <!--系统自带的指示器控件-->
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp">
     </android.support.design.widget.TabLayout>
+
+    <!--Dachshund：德国猎犬。这个控件是指示器,第三方控件-->
+    <com.kekstudio.dachshundtablayout.DachshundTabLayout
+        android:id="@+id/tabLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:tabGravity="center"
+        app:tabMode="scrollable">
+    </com.kekstudio.dachshundtablayout.DachshundTabLayout>
 
     <com.youth.banner.Banner
         android:id="@+id/banner"
@@ -24,5 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v4.view.ViewPager>
+
 
 </LinearLayout>

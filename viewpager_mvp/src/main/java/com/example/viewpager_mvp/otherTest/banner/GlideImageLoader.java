@@ -1,4 +1,4 @@
-package com.example.stepview.banner;
+package com.example.viewpager_mvp.otherTest.banner;
 
 import android.content.Context;
 import android.net.Uri;

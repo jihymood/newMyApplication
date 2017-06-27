@@ -6,4 +6,9 @@
 
     <color name="uncompleted_color">#7D7D7D</color>
     <color name="completed_color">#26A943</color>
+    <color name="colorActivityBackground" >#FAFAFA</color>
+
+
+
+    <color name="main_white">#f2f4f5</color>
 </resources>

@@ -20,6 +20,22 @@ public class FirstFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
             savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_first, null);
+
+
         return view;
+    }
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+//        Bundle bundle = new Bundle();
+//        bundle.putString("ss", "傻逼1");
+//        FirstFragment firstFragment = new FirstFragment();
+//        firstFragment.setArguments(bundle);
+//
+//        String string = getArguments().getString("ss");
+//        Log.e("FirstFragment", string);
     }
 }

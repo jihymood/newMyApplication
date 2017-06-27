@@ -1,9 +1,10 @@
-package com.example.stepview;
+package com.example.viewpager_mvp.otherTest.horizontal;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.horizontalselectedviewlibrary.HorizontalselectedView;
+import com.example.viewpager_mvp.R;
 
 import java.util.ArrayList;
 import java.util.List;
