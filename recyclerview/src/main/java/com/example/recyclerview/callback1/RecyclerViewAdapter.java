@@ -1,4 +1,4 @@
-package com.example.recyclerview.adapter;
+package com.example.recyclerview.callback1;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -35,6 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     public void setOnItemClickListener(onItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }
+
 
     public RecyclerViewAdapter(List<Integer> images, Context context) {
         this.images = images;

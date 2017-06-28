@@ -1,4 +1,4 @@
-package com.example.recyclerview;
+package com.example.recyclerview.three;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,8 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.example.recyclerview.adapter.RecyclerViewAdapter;
-import com.example.recyclerview.adapter.RecyleViewAdapter1;
+import com.example.recyclerview.R;
+import com.example.recyclerview.callback1.RecyclerViewAdapter;
+import com.example.recyclerview.callback2.RecylerViewAdapter1;
 import com.jcodecraeer.xrecyclerview.LoadingMoreFooter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -27,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     LoadingMoreFooter load;
     private RecyclerView recyclerview;
     private RecyclerViewAdapter recyclerViewAdapter;
-    private RecyleViewAdapter1 recyleViewAdapter1;
+    private RecylerViewAdapter1 recyleViewAdapter1;
+    private RecylerViewAdapter2 recyleViewAdapter2;
     private List<Integer> list;
 
     @Override
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 //        recyclerview.setAdapter(recyleViewAdapter1);
 
         /*实现三*/
-        recyleViewAdapter1 = new RecyleViewAdapter1(list);
+        recyleViewAdapter2 = new RecylerViewAdapter2(list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         xRecycleView.setLayoutManager(layoutManager);

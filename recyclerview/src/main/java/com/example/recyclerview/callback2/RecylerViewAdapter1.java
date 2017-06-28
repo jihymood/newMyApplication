@@ -1,4 +1,4 @@
-package com.example.recyclerview.adapter;
+package com.example.recyclerview.callback2;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,12 +15,14 @@ import java.util.List;
  * Created by HASEE on 2017/6/13 18:30
  */
 
-public class RecyleViewAdapter1 extends RecyclerView.Adapter {
+public class RecylerViewAdapter1 extends RecyclerView.Adapter {
 
     private List<Integer> list;
+    private ICallBack iCallBack;
 
-    public RecyleViewAdapter1(List<Integer> list) {
+    public RecylerViewAdapter1(List<Integer> list,ICallBack iCallBack) {
         this.list = list;
+        this.iCallBack = iCallBack;
     }
 
     @Override
@@ -35,10 +37,16 @@ public class RecyleViewAdapter1 extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        MyViewHolder myViewHolder= (MyViewHolder) holder;
+        MyViewHolder myViewHolder = (MyViewHolder) holder;
         myViewHolder.textView.setText("小呆比");
         myViewHolder.imageView.setBackgroundResource(R.mipmap.ic_launcher);
 
+        myViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iCallBack.onClick();
+            }
+        });
     }
 
     @Override
@@ -46,7 +54,8 @@ public class RecyleViewAdapter1 extends RecyclerView.Adapter {
         return list.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         public MyViewHolder(View itemView) {
             super(itemView);

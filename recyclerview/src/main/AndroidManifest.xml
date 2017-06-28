@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".three.MainActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN"/>-->
 
@@ -18,7 +18,14 @@
         </activity>
         <activity android:name=".CallBackActivity">
         </activity>
-        <activity android:name=".FirstActivity">
+        <activity android:name=".callback1.FirstActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".callback2.FirstActivity1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
