@@ -1,4 +1,4 @@
-package com.example.stepview;
+package com.example.drawlayout;
 
 import org.junit.Test;
 

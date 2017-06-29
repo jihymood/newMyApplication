@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">Drawlayout</string>
+
+    <string name="open_drawlayout">打开抽屉</string>
+    <string name="close_drawlayout">关闭抽屉</string>
+</resources>
