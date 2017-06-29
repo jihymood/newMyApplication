@@ -1,4 +1,4 @@
-package com.example.viewpager_mvp.otherTest.coordinatorLayout;
+package com.example.viewpager_mvp.otherTest.coordinatorTabLayout;
 
 
 import android.os.Bundle;

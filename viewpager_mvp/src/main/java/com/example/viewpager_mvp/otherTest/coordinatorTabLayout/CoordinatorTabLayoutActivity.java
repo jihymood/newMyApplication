@@ -1,4 +1,4 @@
-package com.example.viewpager_mvp.otherTest.coordinatorLayout;
+package com.example.viewpager_mvp.otherTest.coordinatorTabLayout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +16,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.hugeterry.coordinatortablayout.CoordinatorTabLayout;
 
-public class CoordinatorLayoutActivity extends AppCompatActivity {
+public class CoordinatorTabLayoutActivity extends AppCompatActivity {
 
     @Bind(R.id.vp)
     ViewPager mViewPager;

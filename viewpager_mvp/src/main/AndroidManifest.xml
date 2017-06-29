@@ -32,13 +32,31 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".home.HomeActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN"/>-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name=".otherTest.coordinatorTabLayout.CoordinatorTabLayoutActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name=".otherTest.coordinatorLayout.second.CoordinatorLayoutActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".otherTest.coordinatorLayout.CoordinatorLayoutActivity">
+        <activity android:name=".otherTest.coordinatorLayout.first.FirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

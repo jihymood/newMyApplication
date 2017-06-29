@@ -1,4 +1,4 @@
-package com.example.viewpager_mvp.otherTest.coordinatorLayout;
+package com.example.viewpager_mvp.otherTest.coordinatorLayout.second;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
