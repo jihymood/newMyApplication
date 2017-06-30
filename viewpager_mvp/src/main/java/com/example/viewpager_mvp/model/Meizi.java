@@ -81,6 +81,7 @@ public class Meizi {
         private String url;
         private boolean used;
         private String who;
+        public List<String> images; //后添加的
 
         public String get_id() {
             return _id;

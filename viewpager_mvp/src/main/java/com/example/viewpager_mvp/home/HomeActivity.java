@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.viewpager_mvp.R;
 import com.example.viewpager_mvp.adapter.MyFragmentAdapter;
+import com.example.viewpager_mvp.constants.GlobalConfig;
 import com.example.viewpager_mvp.fragment.FirstFragment;
 import com.example.viewpager_mvp.otherTest.banner.GlideImageLoader;
 import com.kekstudio.dachshundtablayout.DachshundTabLayout;
@@ -36,6 +37,13 @@ public class HomeActivity extends AppCompatActivity implements IView {
     private Ipresenter presenterImpl;
     private MyFragmentAdapter adapter;
     private List<Fragment> fragments;
+    String[] titles = {
+            GlobalConfig.CATEGORY_NAME_APP,
+            GlobalConfig.CATEGORY_NAME_ANDROID,
+            GlobalConfig.CATEGORY_NAME_IOS,
+            GlobalConfig.CATEGORY_NAME_FRONT_END,
+            GlobalConfig.CATEGORY_NAME_RECOMMEND,
+            GlobalConfig.CATEGORY_NAME_RESOURCE};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +58,14 @@ public class HomeActivity extends AppCompatActivity implements IView {
         presenterImpl = new PresenterImpl(this);
         presenterImpl.subscribe();
         fragments = new ArrayList<>();
-        fragments.add(new FirstFragment());
-        fragments.add(new FirstFragment());
+        fragments.add(FirstFragment.getInstance(titles[0]));
+        fragments.add(FirstFragment.getInstance(titles[1]));
+        fragments.add(FirstFragment.getInstance(titles[2]));
+        fragments.add(FirstFragment.getInstance(titles[3]));
+        fragments.add(FirstFragment.getInstance(titles[4]));
+        fragments.add(FirstFragment.getInstance(titles[5]));
 
-        adapter = new MyFragmentAdapter(getSupportFragmentManager(), fragments);
+        adapter = new MyFragmentAdapter(getSupportFragmentManager(), fragments,titles);
         viewpager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewpager);
         tabLayout1.setupWithViewPager(viewpager);

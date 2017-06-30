@@ -4,8 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.viewpager_mvp.fragment.FirstFragment;
-
 import java.util.List;
 
 /**
@@ -15,24 +13,18 @@ import java.util.List;
 public class MyFragmentAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;
-    private String[] titles = {"一一", "二二", "三三"};
+    private String[] titles;
 
 
-    public MyFragmentAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public MyFragmentAdapter(FragmentManager fm, List<Fragment> fragments, String[] titles) {
         super(fm);
         this.fragments = fragments;
+        this.titles = titles;
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return new FirstFragment();
-            case 1:
-                return new FirstFragment();
-            default:
-                return new FirstFragment();
-        }
+        return fragments.get(position);
     }
 
     @Override

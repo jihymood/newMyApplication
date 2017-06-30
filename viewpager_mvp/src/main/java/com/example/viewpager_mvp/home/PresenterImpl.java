@@ -3,7 +3,7 @@ package com.example.viewpager_mvp.home;
 import android.util.Log;
 
 import com.example.viewpager_mvp.model.Meizi;
-import com.example.viewpager_mvp.model.NetWorkManager;
+import com.example.viewpager_mvp.api.NetWorkManager;
 import com.example.viewpager_mvp.model.PictureModel;
 
 import java.util.ArrayList;

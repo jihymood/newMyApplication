@@ -10,6 +10,7 @@
 
     <!--系统自带的指示器控件-->
     <android.support.design.widget.TabLayout
+        android:visibility="gone"
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp">
@@ -19,7 +20,7 @@
     <com.kekstudio.dachshundtablayout.DachshundTabLayout
         android:id="@+id/tabLayout1"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="?attr/actionBarSize"
         app:tabGravity="center"
         app:tabMode="scrollable">
     </com.kekstudio.dachshundtablayout.DachshundTabLayout>

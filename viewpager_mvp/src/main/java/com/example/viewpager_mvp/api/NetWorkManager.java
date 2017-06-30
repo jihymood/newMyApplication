@@ -1,6 +1,4 @@
-package com.example.viewpager_mvp.model;
-
-import com.example.viewpager_mvp.api.GankiApi;
+package com.example.viewpager_mvp.api;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
