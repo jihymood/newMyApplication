@@ -7,7 +7,6 @@ TabLayout   标签tab        -> TabLayout <br>
       在layout_app_bar的下面，需要添加一行代码<br>
       app:layout_behavior="@string/appbar_scrolling_view_behavior"<br>
       因为在在CoordinatorLayout布局中没有below属性<br>
-      
       方法二：可以在AppBarLayout外面套一层LinearLayout，设置为vertical`<br>
 
 爱吖妹纸AiYaGirl布局效果：<br>
