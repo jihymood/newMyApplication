@@ -1,7 +1,7 @@
 Coordinator 协调者         -> CoordinatorLayout <br>
 AppBar      导航栏、应用栏 -> AppBarLayout<br>
 Collapsing  折叠、压缩     -> CollapsingToolbarLayout<br>
-Toolbar     工具栏         -> Toolbar <br>   
+Toolbar     工具栏         -> Toolbar <br>
 TabLayout   标签tab        -> TabLayout <br>
 ` 注：在CoordinatorLayout布局中，要想保证ViewPager<br>
       在layout_app_bar的下面，需要添加一行代码<br>
