@@ -1,4 +1,4 @@
-package com.example.drawlayout;
+package com.example.drawlayout.second;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,9 +11,15 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.example.drawlayout.ActivityUtils;
+import com.example.drawlayout.R;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+/**
+ *  抽屉里的布局不是按照正常写法来做的
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.nav_view1)
@@ -43,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
         mListener = new MyListener();
         initDrawerLayout();
+
+        SecondFragment secondFragment = new SecondFragment();
+        ActivityUtils.addFragment(getSupportFragmentManager(), R.id.fragment_container, secondFragment);
 
     }
 

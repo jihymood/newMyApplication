@@ -1,4 +1,4 @@
-package com.example.drawlayout;
+package com.example.drawlayout.first;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.drawlayout.ActivityUtils;
+import com.example.drawlayout.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,8 +41,12 @@ public class FirstActivity extends AppCompatActivity implements NavigationView.O
         navigationView.setNavigationItemSelectedListener(this); //抽屉里的点击事件
 
 
-
-
+        //替换掉布局中的FrameLayout
+        FirstFragment firstFragment = new FirstFragment();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.add(R.id.fragment_container, firstFragment);
+//        transaction.commit();
+        ActivityUtils.addFragment(getSupportFragmentManager(), R.id.fragment_container, firstFragment);
 
 
     }
