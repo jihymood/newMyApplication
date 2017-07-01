@@ -3,7 +3,10 @@ AppBar      导航栏、应用栏 -> AppBarLayout<br>
 Collapsing  折叠、压缩     -> CollapsingToolbarLayout<br>
 Toolbar     工具栏         -> Toolbar <br>   
 TabLayout   标签tab        -> TabLayout <br>
-
+` 注：在CoordinatorLayout布局中，要想保证ViewPager<br>
+      在layout_app_bar的下面，需要添加一行代码<br>
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"<br>
+      因为在在CoordinatorLayout布局中没有below属性`<br>
 
 爱吖妹纸AiYaGirl布局效果：<br>
 -CoordinatorLayout<br>
