@@ -10,10 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.drawlayout.ActivityUtils;
 import com.example.drawlayout.R;
+import com.example.drawlayout.second.SecondFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,9 +43,6 @@ public class FirstActivity extends AppCompatActivity implements NavigationView.O
 
         //替换掉布局中的FrameLayout
         FirstFragment firstFragment = new FirstFragment();
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.add(R.id.fragment_container, firstFragment);
-//        transaction.commit();
         ActivityUtils.addFragment(getSupportFragmentManager(), R.id.fragment_container, firstFragment);
 
 
@@ -101,9 +98,13 @@ public class FirstActivity extends AppCompatActivity implements NavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_camera:
-                Toast.makeText(this, "我是第一行", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "我是第一行", Toast.LENGTH_SHORT).show();
+                SecondFragment secondFragment = new SecondFragment();
+                ActivityUtils.addFragment(getSupportFragmentManager(),R.id.fragment_container,secondFragment);
                 break;
             case R.id.nav_gallery:
+                FirstFragment firstFragment = new FirstFragment();
+                ActivityUtils.addFragment(getSupportFragmentManager(), R.id.fragment_container, firstFragment);
                 break;
             case R.id.nav_slideshow:
                 break;
