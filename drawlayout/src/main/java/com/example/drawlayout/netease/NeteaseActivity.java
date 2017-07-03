@@ -17,7 +17,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.drawlayout.R;
+import com.example.drawlayout.first.FirstFragment;
 import com.example.drawlayout.netease.book.BookFragment;
+import com.example.drawlayout.second.SecondFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +50,7 @@ public class NeteaseActivity extends AppCompatActivity implements NavigationView
     private MyViewPagerAdapter adapter;
     private List<Fragment> list;
     private int currentFragment;
-    private String[] mTitles = {"热映榜","TOP250"};
+    private String[] mTitles = {"热映榜", "TOP250"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +73,7 @@ public class NeteaseActivity extends AppCompatActivity implements NavigationView
         adapter = new MyViewPagerAdapter(getSupportFragmentManager(), this, list);
         viewpager.setAdapter(adapter);
 
-        radiogroup.setOnCheckedChangeListener(this);
+        radiogroup.setOnCheckedChangeListener(this); //如果没有这个监听事件，点击radiogroup的radiobutton没有效果
         viewpager.addOnPageChangeListener(this);
 
     }
@@ -79,8 +81,8 @@ public class NeteaseActivity extends AppCompatActivity implements NavigationView
     private void initFragment() {
         list = new ArrayList<>();
         list.add(new BookFragment());
-        list.add(new BookFragment());
-        list.add(new BookFragment());
+        list.add(new FirstFragment());
+        list.add(new SecondFragment());
     }
 
     @Override
@@ -159,4 +161,28 @@ public class NeteaseActivity extends AppCompatActivity implements NavigationView
     public void onPageScrollStateChanged(int state) {
 
     }
+
+    /**
+     *  一：如果没有radiogroup.setOnCheckedChangeListener(this);这个监听事件，
+     *  点击radiogroup的radiobutton没有效果
+     *
+     *  二：或者直接对radiobutton进行点击监听，效果一样
+     *
+     * @param view
+     */
+//    @OnClick({R.id.rb_home, R.id.rb_dynamic, R.id.rb_message})
+//    public void onViewClicked(View view) {
+//        switch (view.getId()) {
+//            case R.id.rb_home:
+//                currentFragment = 0;
+//                break;
+//            case R.id.rb_dynamic:
+//                currentFragment = 1;
+//                break;
+//            case R.id.rb_message:
+//                currentFragment = 2;
+//                break;
+//        }
+//        viewpager.setCurrentItem(currentFragment);
+//    }
 }
