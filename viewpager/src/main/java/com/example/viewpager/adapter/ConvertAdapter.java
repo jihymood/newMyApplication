@@ -3,7 +3,6 @@ package com.example.viewpager.adapter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,7 @@ import java.util.List;
  * Created by HASEE on 2017/6/14 14:26
  */
 
-public class ConvertAdapter extends Adapter {
+public class ConvertAdapter extends RecyclerView.Adapter {
 
     private List<ZhuangBi> list;
     public ConvertAdapter(List<ZhuangBi> list) {

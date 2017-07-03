@@ -1,5 +1,6 @@
 package com.example.viewpager.adapter;
 
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -8,9 +9,10 @@ import com.example.viewpager.Fragment.ElementaryFragment;
 import com.example.viewpager.Fragment.MapFragment;
 import com.example.viewpager.Fragment.ZipFragment;
 
-
 /**
  * Created by HASEE on 2017/6/7 14:13
+ *
+ * fragment不是从activity中传过来的，这样写不好
  */
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {

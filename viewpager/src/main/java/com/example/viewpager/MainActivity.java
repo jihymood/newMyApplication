@@ -12,6 +12,8 @@ import butterknife.ButterKnife;
 
 /**
  * 滑动页
+ * 建议：按照功能模块分包
+ *
  */
 public class MainActivity extends AppCompatActivity {
 
