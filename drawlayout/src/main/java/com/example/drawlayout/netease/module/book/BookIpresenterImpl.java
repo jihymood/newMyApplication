@@ -1,16 +1,16 @@
-package com.example.drawlayout.netease.book;
+package com.example.drawlayout.netease.module.book;
 
 import android.util.Log;
 
 import com.example.drawlayout.netease.api.ApiManager;
 import com.example.drawlayout.netease.model.Meizi;
 
-import java.util.List;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by HASEE on 2017/7/3 15:35
@@ -19,7 +19,7 @@ import rx.schedulers.Schedulers;
 public class BookIpresenterImpl implements BookIpresenter {
 
     private IBookView iBookView;  //通过构造函数传进来初始化才能在该类中使用
-    private Subscription subscription;
+    private Disposable subscription;
 
     public BookIpresenterImpl(IBookView iBookView) {
         this.iBookView = iBookView;
@@ -32,8 +32,8 @@ public class BookIpresenterImpl implements BookIpresenter {
 
     @Override
     public void unSubscribe() {
-        if (!subscription.isUnsubscribed() && subscription != null) {
-            subscription.unsubscribe();
+        if (!subscription.isDisposed()&&subscription != null) {
+            subscription.dispose();
         }
     }
 
@@ -43,22 +43,15 @@ public class BookIpresenterImpl implements BookIpresenter {
                 .getMeizi("福利", 10, 1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Meizi>() {
+                .subscribe(new Consumer<Meizi>() {
                     @Override
-                    public void onCompleted() {
-
+                    public void accept(@NonNull Meizi meizi) throws Exception {
+                        iBookView.setBookHotList(meizi.getResults());
                     }
-
+                }, new Consumer<Throwable>() {
                     @Override
-                    public void onError(Throwable e) {
-                        Log.e("BookIpresenterImpl", e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(Meizi meizi) {
-                        iBookView.refresh();
-                        List<Meizi.ResultsBean> results = meizi.getResults();
-                        iBookView.setBookHotList(results);
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        Log.e("BookIpresenterImpl", throwable.getMessage());
                     }
                 });
     }

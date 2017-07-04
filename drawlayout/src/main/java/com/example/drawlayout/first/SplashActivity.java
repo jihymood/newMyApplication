@@ -13,16 +13,17 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.example.drawlayout.R;
-import com.example.drawlayout.second.MainActivity;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+
 /*进入应用过渡页效果*/
 public class SplashActivity extends AppCompatActivity {
 
@@ -67,9 +68,9 @@ public class SplashActivity extends AppCompatActivity {
         Observable.timer(1000, TimeUnit.MILLISECONDS)
 //                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Long>() {
+                .subscribe(new Consumer<Long>() {
                     @Override
-                    public void call(Long aLong) {
+                    public void accept(@NonNull Long aLong) throws Exception {
                         startAnim();
                     }
                 });
@@ -102,7 +103,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
 
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, FirstActivity.class));
                 SplashActivity.this.finish();
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }

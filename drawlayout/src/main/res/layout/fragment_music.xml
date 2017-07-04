@@ -1,0 +1,30 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.drawlayout.netease.module.music.MusicFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!--Dachshund：德国猎犬。这个控件是指示器,第三方控件-->
+    <com.kekstudio.dachshundtablayout.DachshundTabLayout
+        android:id="@+id/tabLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:tabGravity="center"
+        android:background="@color/blue"
+        app:tabTextColor="@color/colorTitle"
+        app:tabMode="scrollable">
+    </com.kekstudio.dachshundtablayout.DachshundTabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>

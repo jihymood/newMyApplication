@@ -23,7 +23,7 @@ public class FirstActivity extends AppCompatActivity implements NavigationView.O
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.nav_view)
-    NavigationView navView;
+    NavigationView navigationView;
     @Bind(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
@@ -36,7 +36,6 @@ public class FirstActivity extends AppCompatActivity implements NavigationView.O
         setToolbar();
 //        setToolbar_other();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this); //抽屉里的点击事件
 
@@ -85,10 +84,10 @@ public class FirstActivity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        assert drawer != null;
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        assert drawerLayout != null;
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -117,9 +116,9 @@ public class FirstActivity extends AppCompatActivity implements NavigationView.O
             default:
                 break;
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        assert drawer != null;
-        drawer.closeDrawer(GravityCompat.START);
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        assert drawerLayout != null;
+        drawerLayout.closeDrawer(GravityCompat.START);
         return false;
     }
 }

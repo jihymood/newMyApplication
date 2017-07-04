@@ -1,4 +1,4 @@
-package com.example.drawlayout.netease.book;
+package com.example.drawlayout.netease.module.book;
 
 
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BookReadingFragment extends Fragment implements IBookView{
+public class BookReadingFragment extends Fragment implements IBookView {
 
     @Bind(R.id.recyleView)
     RecyclerView recyleView;

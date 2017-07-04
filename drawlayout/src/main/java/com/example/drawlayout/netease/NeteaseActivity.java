@@ -17,8 +17,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.drawlayout.R;
-import com.example.drawlayout.first.FirstFragment;
-import com.example.drawlayout.netease.book.BookFragment;
+import com.example.drawlayout.netease.module.book.BookFragment;
+import com.example.drawlayout.netease.module.music.MusicFragment;
 import com.example.drawlayout.second.SecondFragment;
 
 import java.util.ArrayList;
@@ -81,7 +81,7 @@ public class NeteaseActivity extends AppCompatActivity implements NavigationView
     private void initFragment() {
         list = new ArrayList<>();
         list.add(new BookFragment());
-        list.add(new FirstFragment());
+        list.add(new MusicFragment());
         list.add(new SecondFragment());
     }
 

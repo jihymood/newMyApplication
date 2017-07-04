@@ -1,4 +1,4 @@
-package com.example.drawlayout.netease.book;
+package com.example.drawlayout.netease.module.book;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

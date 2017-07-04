@@ -1,4 +1,4 @@
-package com.example.drawlayout.netease.book;
+package com.example.drawlayout.netease.module.book;
 
 import com.example.drawlayout.netease.model.Meizi;
 

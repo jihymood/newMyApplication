@@ -2,9 +2,9 @@ package com.example.drawlayout.netease.api;
 
 import com.example.drawlayout.netease.model.Meizi;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import rx.Observable;
 
 /**
  * Created by HASEE on 2017/7/3 15:37
