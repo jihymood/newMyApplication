@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.rxjava20.Api.PBikeService;
 import com.example.rxjava20.bean.Bike;
+import com.example.rxjava20.bean.NBA;
 import com.example.rxjava20.bean.News;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -19,6 +20,8 @@ import java.util.Map;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,7 +44,8 @@ public class FirstActivity extends AppCompatActivity {
 //        getBike2();
 //        getNews();
 //        getNews1();
-        getNew2();
+//        getNew2();
+        getNBA();
     }
 
 
@@ -246,6 +250,37 @@ public class FirstActivity extends AppCompatActivity {
                     @Override
                     public void onComplete() {
 
+                    }
+                });
+    }
+
+    public void getNBA() {  //成功
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://op.juhe.cn/")
+//                .baseUrl("http://op.juhe.cn/onebox/basketball/nba/")
+//                .baseUrl("http://op.juhe.cn/onebox/basketball/nba?key=98020a1e920819b8ff4fcfbdd7747f8c/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        PBikeService service = retrofit.create(PBikeService.class);
+        service
+//                .getNBA()
+//                .getNBA1("98020a1e920819b8ff4fcfbdd7747f8c")
+//                .getNBA3()
+                .getNBA3("98020a1e920819b8ff4fcfbdd7747f8c")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<NBA>() {
+                    @Override
+                    public void accept(@NonNull NBA nba) throws Exception {
+                        Log.e("FirstActivity", nba.getReason());
+                        text.setText(nba.getReason());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        text.setText(throwable.getMessage().toString());
                     }
                 });
     }

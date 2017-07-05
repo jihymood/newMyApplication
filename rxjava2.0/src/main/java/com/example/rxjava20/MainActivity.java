@@ -10,6 +10,7 @@ import com.example.rxjava20.Api.BaiDuService;
 import com.example.rxjava20.bean.Book;
 import com.example.rxjava20.bean.DoubanBook;
 import com.example.rxjava20.bean.Weather;
+import com.google.gson.Gson;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import org.reactivestreams.Subscriber;
@@ -22,7 +23,11 @@ import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +37,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private TextView text;
 
     @Override
@@ -42,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
 //        getDouban();
 //        getBaidu();
 //        getBook();
-        getDoubanBook();
-//        getDoubanBook1();
+//        getDoubanBook();
+        getDoubanBook1();
 //        getWeather();
 //        getWeather1();
 
-
+//        oKhttp3();
 
 
     }
@@ -204,38 +210,70 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void getDoubanBook() { //失败，可能是解析json出问题了?? response为空
-        Retrofit retrofit=new Retrofit.Builder()
+    public void getDoubanBook() { //失败，可能是解析json出问题了?? response为空  HTTP 403 Forbidden
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://api.m.mtime.cn/PageSubArea/TrailerList.api/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        BaiDuService service=retrofit.create(BaiDuService.class);
-        Call<DoubanBook> call=service.getDouban();
-        call.enqueue(new Callback<DoubanBook>() {
-            @Override
-            public void onResponse(Call<DoubanBook> call, Response<DoubanBook> response) {
-                Toast.makeText(MainActivity.this, "获取成功"+response.body(), Toast.LENGTH_SHORT).show();
-//                text.setText(response.body().toString());
-            }
+        BaiDuService service = retrofit.create(BaiDuService.class);
+        service.getDouban()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe( new Consumer<DoubanBook>() {
+                    @Override
+                    public void accept(@NonNull DoubanBook doubaiRoot) throws Exception {
+                        text.setText(doubaiRoot.getTrailers().get(0).getSummary().toString());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        Log.e("MainActivity", throwable.getMessage());
+                    }
+                });
 
-            @Override
-            public void onFailure(Call<DoubanBook> call, Throwable t) {
-
-            }
-        });
+//        call.enqueue(new Callback<DoubaiRoot>() {
+//            @Override
+//            public void onResponse(Call<DoubaiRoot> call, Response<DoubaiRoot> response) {
+//                Toast.makeText(MainActivity.this, "获取成功"+response.body(), Toast.LENGTH_SHORT).show();
+////                text.setText(response.body().toString());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<DoubaiRoot> call, Throwable t) {
+//                Log.e("MainActivity", t.getMessage());
+//            }
+//        });
     }
 
-    public void getDoubanBook1() { //失败
+    // TODO: 2017/7/5 终于解决这个问题了,gsonformat生成的实体类中 rating参数有误，改为double型即可
+    public void getDoubanBook1() { //失败 -->成功
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.m.mtime.cn/")
+//                .baseUrl("http://api.m.mtime.cn/")
+                .baseUrl("http://api.m.mtime.cn/PageSubArea/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         BaiDuService service = retrofit.create(BaiDuService.class);
-        service.getDouban1("TrailerList.api")
-                .subscribeOn(Schedulers.newThread())
+        service
+//                .getDouban2()                 //成功
+//                .getDouban1("TrailerList.api")  //成功
+//                .getDouban3()
+                .getDouban4("TrailerList.api")
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<DoubanBook>() {
+                    @Override
+                    public void accept(@NonNull DoubanBook doubanBook) throws Exception {
+                        Toast.makeText(MainActivity.this, "获取成功" + doubanBook.getTrailers(), Toast.LENGTH_SHORT).show();
+                        text.setText(doubanBook.getTrailers().get(0).getSummary());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        Log.e("MainActivity", throwable.getMessage());
+                    }
+                });
 //                .subscribe(new Consumer<DoubanBook>() {
 //                    @Override
 //                    public void accept(@NonNull DoubanBook doubanBook) throws Exception {
@@ -243,30 +281,30 @@ public class MainActivity extends AppCompatActivity {
 //                        Log.e("MainActivity", doubanBook.toString());
 //                    }
 //                });
-                .subscribe(new Subscriber<DoubanBook>() {
-                    @Override
-                    public void onSubscribe(Subscription s) {
-                        s.request(Long.MAX_VALUE);
-                    }
-
-                    @Override
-                    public void onNext(DoubanBook doubanBook) {
-                        Toast.makeText(MainActivity.this, "获取成功"+doubanBook.getTrailers(), Toast.LENGTH_SHORT).show();
-//                        text.setText(doubanBook.toString());
-//                        text.setText(doubanBook.getTrailers().get(0).getSummary());
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        t.printStackTrace();
-                        Toast.makeText(MainActivity.this, "获取失败，请检查网络是否畅通", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+//                .subscribe(new Subscriber<DoubanBook>() {
+//                    @Override
+//                    public void onSubscribe(Subscription s) {
+//                        s.request(Long.MAX_VALUE);
+//                    }
+//
+//                    @Override
+//                    public void onNext(DoubanBook doubanBook) {
+//                        Toast.makeText(MainActivity.this, "获取成功"+doubanBook.getTrailers(), Toast.LENGTH_SHORT).show();
+////                        text.setText(doubanBook.toString());
+////                        text.setText(doubanBook.getTrailers().get(0).getSummary());
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//                        t.printStackTrace();
+//                        Toast.makeText(MainActivity.this, "获取失败，请检查网络是否畅通", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
     }
 
 
@@ -294,8 +332,8 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 如果没有
-     *   .subscribeOn(Schedulers.newThread()) //必须要有
-     *   .observeOn(AndroidSchedulers.mainThread())//必须要有
+     * .subscribeOn(Schedulers.newThread()) //必须要有
+     * .observeOn(AndroidSchedulers.mainThread())//必须要有
      */
     public void getWeather1() { //  加Flowable+subscribeOn+observeOn返回成功，不加则返回失败
         Retrofit retrofit = new Retrofit.Builder()
@@ -331,4 +369,55 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
+    public void oKhttp3() {
+        String url = "http://api.m.mtime.cn/PageSubArea/TrailerList.api";
+        String url2 = "http://op.juhe.cn/onebox/basketball/nba?key=98020a1e920819b8ff4fcfbdd7747f8c";
+
+        //创建okHttpClient对象
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        //创建一个Request
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        //new call
+        okhttp3.Call call = mOkHttpClient.newCall(request);
+        //请求加入调度
+        call.enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+                text.setText(e.getMessage().toString());
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+                final String json = response.body().string();
+//                Log.e("MainActivity", json);
+                LogUtil.e(json);
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Log.e(TAG, "onResponse:" + json);
+//                        Gson gson = new Gson();
+//                        NBA nba ;
+//                        nba = gson.fromJson(json, NBA.class);
+//                        text.setText(nba.getReason());
+//                    }
+//                });
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.e(TAG, "onResponse:" + json);
+                        Gson gson = new Gson();
+                        DoubanBook doubanBook ;
+                        doubanBook = gson.fromJson(json, DoubanBook.class);
+                        text.setText(doubanBook.getTrailers().get(0).getSummary());
+                    }
+                });
+            }
+        });
+    }
+
+
 }
