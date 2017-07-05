@@ -40,10 +40,20 @@ public interface BaiDuService {
 
 
     @GET("/")
-    Call<DoubanBook> getDouban();
+    Observable<DoubanBook> getDouban(); //失败
 
     @GET("PageSubArea/{address}")
-    Flowable<DoubanBook> getDouban1(@Path("address")String address);
+    Observable<DoubanBook> getDouban1(@Path("address")String address); //成功
+
+    @GET("PageSubArea/TrailerList.api")
+    Observable<DoubanBook> getDouban2();  //成功
+
+    @GET("TrailerList.api")
+    Observable<DoubanBook> getDouban3();  //成功
+
+//    @GET("/{address}") //如果这里参数，则最前面不要加斜杠
+    @GET("{address}")
+    Observable<DoubanBook> getDouban4(@Path("address")String address);  //成功
 
     @GET("/")
     Call<Weather> getWeather(@Query("app") String app, @Query("weaid") String weaid
