@@ -41,7 +41,10 @@ public class DoubanBook {
         private String hightUrl;
         private String videoTitle;
         private int videoLength;
-        private int rating;
+
+        //json串里有int型、有double型，不管使用gsonformat或者是网页上自动生成实体类，
+        // 都会自动写成int型，这也就直接导致解析的时候报错JsonSyntaxException NumberFormatException
+        private double rating;
         private String summary;
         private List<String> type;
 
@@ -109,7 +112,7 @@ public class DoubanBook {
             this.videoLength = videoLength;
         }
 
-        public int getRating() {
+        public double getRating() {
             return rating;
         }
 
