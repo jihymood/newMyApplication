@@ -1,6 +1,7 @@
 package com.example.drawlayout.netease.module.music.news;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -46,9 +47,16 @@ public class NewsFragment extends Fragment implements NewsIView{
         newsIpresenter.subscribe();
 
         recyleView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        recyleView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyleView.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(new NewsRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(String url) {
+                Intent intent = new Intent(getActivity(), NewsActivity.class);
+                intent.putExtra("url",url);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

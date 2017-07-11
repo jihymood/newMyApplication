@@ -27,7 +27,8 @@ public class NBAFragment extends Fragment implements NBAIview {
     SwipeRefreshLayout swipeRefresh;
 
     private NBA.ResultBean resultBean;
-    private NBALiveRecyclerAdapter adapter;
+    private NBARecyclerViewAdapter adapter;
+//    private NBALiveRecyclerAdapter adapter;
     private NBAIpresenter ipresenter;
 
     @Override
@@ -38,18 +39,16 @@ public class NBAFragment extends Fragment implements NBAIview {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nba, container, false);
         ButterKnife.bind(this, view);
 
-
-//        adapter = new NBARecyclerViewAdapter(getActivity());
-        adapter = new NBALiveRecyclerAdapter(getActivity());
+        adapter = new NBARecyclerViewAdapter(getActivity());
+//        adapter = new NBALiveRecyclerAdapter(getActivity());
         ipresenter = new NBAIpresenterImpl(this);
+        ipresenter.subscribe();  //根据情况来，如果数据不是动态设置给xxAdapter
 
         recyleView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyleView.setAdapter(adapter);
-        ipresenter.subscribe();  //根据情况来，如果数据不是动态设置给xxAdapter
 
 
         return view;
@@ -63,8 +62,7 @@ public class NBAFragment extends Fragment implements NBAIview {
 
     @Override
     public void setDataToAdapter(List<Object> list) {
-
-        adapter.setList(list);
+        adapter.setData(list);
     }
 
     @Override

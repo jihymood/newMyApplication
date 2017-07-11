@@ -6,10 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.drawlayout.R;
-import com.example.drawlayout.netease.model.SubNBA;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,9 +49,9 @@ public class NBARecyclerViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        SubNBA subNBA = (SubNBA) mData.get(position);
-        ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.text1.setText(subNBA.getLink2text());
+//        SubNBA subNBA = (SubNBA) mData.get(position);  //类型转换异常
+//        ViewHolder viewHolder = (ViewHolder) holder;
+//        viewHolder.text1.setText(subNBA.getLink2text());
     }
 
     @Override
@@ -64,12 +62,6 @@ public class NBARecyclerViewAdapter extends RecyclerView.Adapter {
     static class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.imageView)
         ImageView imageView;
-        @Bind(R.id.text1)
-        TextView text1;
-        @Bind(R.id.text2)
-        TextView text2;
-        @Bind(R.id.text3)
-        TextView text3;
 
         ViewHolder(View view) {
             super(view);

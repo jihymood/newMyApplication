@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 
 import com.example.drawlayout.R;
 import com.example.drawlayout.netease.base.constants;
+import com.example.drawlayout.netease.module.music.news.NewsFragment;
+import com.example.drawlayout.netease.module.music.nba.NBAFragment;
+import com.example.drawlayout.netease.module.music.nbalive.NBALiveFragment;
 import com.kekstudio.dachshundtablayout.DachshundTabLayout;
 import com.kekstudio.dachshundtablayout.indicators.LineMoveIndicator;
 
@@ -45,6 +48,7 @@ public class MusicFragment extends Fragment {
 
         LineMoveIndicator lineMoveIndicator = new LineMoveIndicator(tabLayout1);
         tabLayout1.setAnimatedIndicator(lineMoveIndicator);
+//        tabLayout1.setLayoutMode(TabLayout.MODE_FIXED);
         initFragment();
         adapter = new MusicViewPagerAdapter(getChildFragmentManager(), getActivity(), list, mTitles);
         viewpager.setAdapter(adapter);
@@ -56,8 +60,9 @@ public class MusicFragment extends Fragment {
 
     public void initFragment() {
         list = new ArrayList<>();
+        list.add(new NBALiveFragment());
         list.add(new NBAFragment());
-        list.add(new CBAFragment());
+        list.add(new NewsFragment());
 
     }
 

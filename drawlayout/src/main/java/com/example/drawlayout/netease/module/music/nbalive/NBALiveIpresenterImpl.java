@@ -1,9 +1,9 @@
-package com.example.drawlayout.netease.module.music;
+package com.example.drawlayout.netease.module.music.nbalive;
 
 import android.util.Log;
 
 import com.example.drawlayout.netease.api.ApiManager;
-import com.example.drawlayout.netease.model.NBA;
+import com.example.drawlayout.netease.model.NBALive;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +20,12 @@ import io.reactivex.schedulers.Schedulers;
  * Created by HASEE on 2017/7/4 10:31
  */
 
-public class NBAIpresenterImpl implements NBAIpresenter {
+public class NBALiveIpresenterImpl implements NBALiveIpresenter {
 
-    private NBAIView nbaiView;
+    private NBALiveIView nbaiView;
     private Disposable subscription;
 
-    public NBAIpresenterImpl(NBAIView nbaiView) {
+    public NBALiveIpresenterImpl(NBALiveIView nbaiView) {
         this.nbaiView = nbaiView;
     }
 
@@ -45,16 +45,15 @@ public class NBAIpresenterImpl implements NBAIpresenter {
     @Override
     public void getNba() {
         subscription = ApiManager.getNbAapi()
-                .getNBA("98020a1e920819b8ff4fcfbdd7747f8c")
-//                .getNBA()
+                .getNBALive("98020a1e920819b8ff4fcfbdd7747f8c")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<NBA>() {
+                .subscribe(new Consumer<NBALive>() {
                     @Override
-                    public void accept(@NonNull NBA nba) throws Exception {
-                        List<Object> list = new ArrayList<>();
-                        List<NBA.ResultBean.ListBean> list1 = nba.getResult().getList();
-                        for (NBA.ResultBean.ListBean listBean : list1) {
+                    public void accept(@NonNull NBALive nba) throws Exception {
+                        List<NBALive.ResultBean.ListBean.TrBean> list = new ArrayList<>();
+                        List<NBALive.ResultBean.ListBean> list1 = nba.getResult().getList();
+                        for (NBALive.ResultBean.ListBean listBean : list1) {
                             list.addAll(listBean.getTr());
                         }
                         nbaiView.setData(list);

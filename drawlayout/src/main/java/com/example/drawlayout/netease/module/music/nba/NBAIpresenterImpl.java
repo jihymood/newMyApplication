@@ -95,15 +95,18 @@ public class NBAIpresenterImpl implements NBAIpresenter {
                 Gson gson = new Gson();
                 NBA nba = gson.fromJson(json, NBA.class);
                 NBA.ResultBean result = nba.getResult();
+                if (result != null) {
 
-                NBA.ResultBean._$1Bean list_$1 = result.get_$1();
-                NBA.ResultBean._$2Bean list_$2 = result.get_$2();
-                NBA.ResultBean._$4Bean list_$4 = result.get_$4();
-                List<Object> list = new ArrayList<>();
-                list.add(list_$1);
-                list.add(list_$2);
-                list.add(list_$4);
-                iview.setDataToAdapter(list);
+                    NBA.ResultBean._$1Bean list_$1 = result.get_$1();
+                    NBA.ResultBean._$2Bean list_$2 = result.get_$2();
+                    NBA.ResultBean._$4Bean list_$4 = result.get_$4();
+
+                    List<Object> list = new ArrayList<>();
+                    list.add(list_$1);
+                    list.add(list_$2);
+                    list.add(list_$4);
+                    iview.setDataToAdapter(list);
+                }
 //                runOnUiThread(new Runnable() {
 //                    @Override
 //                    public void run() {

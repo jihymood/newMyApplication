@@ -9,14 +9,17 @@
 
     <!-- TODO: Update blank fragment layout -->
     <!--Dachshund：德国猎犬。这个控件是指示器,第三方控件-->
+    <!--app:tabGravity="center"显示在中间，并不能铺满-->
+    <!--app:tabGravity="fill"  app:tabMode="fixed" 可以铺满 toolbar-->
     <com.kekstudio.dachshundtablayout.DachshundTabLayout
         android:id="@+id/tabLayout1"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:tabGravity="center"
+        app:tabGravity="fill"
         android:background="@color/blue"
         app:tabTextColor="@color/colorTitle"
-        app:tabMode="scrollable">
+        app:tabMode="fixed"
+        >
     </com.kekstudio.dachshundtablayout.DachshundTabLayout>
 
     <android.support.v4.view.ViewPager

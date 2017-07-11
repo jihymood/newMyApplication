@@ -7,5 +7,5 @@ import com.example.drawlayout.netease.base.BaseIpresenter;
  */
 
 public interface BookIpresenter extends BaseIpresenter {
-    void getHotList();
+    void getHotList(boolean isFresh);
 }

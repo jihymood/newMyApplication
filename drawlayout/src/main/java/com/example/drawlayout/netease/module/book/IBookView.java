@@ -9,10 +9,14 @@ import java.util.List;
  */
 
 public interface IBookView {
-    void refresh();
+    void showSwipeLoading();
 
-    void hideDialog();
+    void hideSwipeLoading();
 
     void setBookHotList(List<Meizi.ResultsBean> list);
+
+    String getCategoryName();
+
+    void setLoading();
 
 }

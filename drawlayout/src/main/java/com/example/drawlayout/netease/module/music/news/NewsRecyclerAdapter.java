@@ -1,6 +1,7 @@
 package com.example.drawlayout.netease.module.music.news;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,16 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
     private Context context;
     private List<News.T1348647909107Bean> mData;
 
+    private OnItemClickListener onItemClickListener;
+
+    public interface OnItemClickListener {
+        void onClick(String url);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
     public NewsRecyclerAdapter(Context context) {
         this.context = context;
         mData = new ArrayList<>();
@@ -38,30 +49,33 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
             mData.addAll(list);
             notifyDataSetChanged();
         }
-
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_nba, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, null);
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ViewHolder viewHolder = (ViewHolder) holder;
+        final ViewHolder viewHolder = (ViewHolder) holder;
         News.T1348647909107Bean bean = mData.get(position);
-        viewHolder.text1.setText(bean.getLtitle());
-        viewHolder.text2.setText(bean.getPtime());
-        Glide.with(context).load(bean.getImgsrc()).into(viewHolder.imageView);
-        viewHolder.text3.setText(bean.getSource());
+        viewHolder.tvNameChinease.setText(bean.getLtitle());
+        viewHolder.tvNameEnglish.setText(bean.getPtime());
+        Glide.with(context).load(bean.getImgsrc()).into(viewHolder.ivAvatar);
+        viewHolder.tv_name.setText(bean.getSource());
 
+        final String url = bean.getUrl();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                viewHolder.tv_name.setTextColor(Color.GRAY);
+                viewHolder.tvNameEnglish.setTextColor(Color.GRAY);
+                viewHolder.tvNameChinease.setTextColor(Color.GRAY);
+                onItemClickListener.onClick(url);
             }
         });
 
@@ -73,14 +87,14 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.imageView)
-        ImageView imageView;
-        @Bind(R.id.text1)
-        TextView text1;
-        @Bind(R.id.text2)
-        TextView text2;
-        @Bind(R.id.text3)
-        TextView text3;
+        @Bind(R.id.iv_avatar)
+        ImageView ivAvatar;
+        @Bind(R.id.tv_name_chinease)
+        TextView tvNameChinease;
+        @Bind(R.id.tv_name_english)
+        TextView tvNameEnglish;
+        @Bind(R.id.tv_name)
+        TextView tv_name;
 
         ViewHolder(View view) {
             super(view);
