@@ -18,10 +18,9 @@
         app:text="测试文字颜色和字号大小"
         app:textColor="#273590"/>
 
-    <com.example.bezier.view.fourthree.BadgedFourThreeImageView
-        android:id="@+id/badgedFourThreeImageView"
+    <com.example.bezier.view.TaiJiView
+        android:id="@+id/taiji"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

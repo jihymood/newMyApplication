@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.bezier.MainActivity">
+    tools:context="com.example.bezier.drawable.MainActivity">
 
 
-    <com.example.bezier.view.BezierView
-        android:id="@+id/bezier"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+    <!--<com.example.bezier.view.BezierView-->
+        <!--android:id="@+id/bezier"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100dp"/>-->
 
     <ImageView
         android:id="@+id/image"
